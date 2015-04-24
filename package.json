@@ -1,0 +1,6 @@
+{
+  "name": "timedbuff",
+  "dependencies": {
+    "mocha": "~2.2.4"
+  }
+}
