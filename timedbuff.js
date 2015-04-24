@@ -10,7 +10,7 @@
                 var l = _buff.push(value);
                 setTimeout(function() {
                     _buff.splice(l - 1, 1);
-                }, expire_time - Date.now() - ts);
+                }, expire_time - (Date.now() - ts));
             },
             content: function() {
                 return _buff.slice(0);
