@@ -20,12 +20,13 @@ describe("TimedBuff", function() {
             assert.equal(tb.last(), 2);
         });
 
-        it("should remove expired elements automatically", function() {
+        it("should remove expired elements automatically", function(done) {
             var tb = new timedbuff.TimedBuff(1);
             tb.push(Date.now(), 500);
             assert.equal(tb.length(), 1); 
             setTimeout(function() {
                 assert.equal(tb.length(), 0); 
+                done();
             }, 1000);
         });
     });
