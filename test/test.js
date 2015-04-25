@@ -29,5 +29,17 @@ describe("TimedBuff", function() {
                 done();
             }, 1000);
         });
+
+        it("should not remove random elements when an element is manually removed", function(done) {
+            var tb = new timedbuff.TimedBuff(1000);
+            tb.push(Date.now() - 500, 1);
+            tb.push(Date.now(), 2);
+            tb.remove(1);
+            setTimeout(function() {
+                assert.equal(tb.length(), 1);
+                done();
+            }, 600);
+        });
+
     });
 });

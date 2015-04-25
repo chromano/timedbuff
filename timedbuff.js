@@ -4,13 +4,17 @@
             throw "Missing parameter expire time";
         }
         var _buff = [];
+        var _timers = [];
 
         return {
             push: function(ts, value) {
                 _buff.push(value);
-                setTimeout(function() {
-                    _buff.splice(_buff.indexOf(value), 1);
+                var tid = setTimeout(function() {
+                     var idx = _buff.indexOf(value);
+                    _buff.splice(idx, 1);
+                    _timers.splice(idx, 1);
                 }, expire_time - (Date.now() - ts));
+                _timers.push(tid);
             },
             content: function() {
                 return _buff.slice(0);
@@ -27,6 +31,12 @@
             },
             length: function() {
                 return _buff.length;
+            },
+            remove: function(value) {
+                var idx = _buff.indexOf(value);
+                _buff.splice(idx, 1);
+                clearTimeout(_timers[idx]);
+                _timers.splice(idx, 1);
             }
         }
     };
