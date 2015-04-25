@@ -41,5 +41,13 @@ describe("TimedBuff", function() {
             }, 600);
         });
 
+        it("should supply methods to retrieve oldest and newest elements", function() {
+            var tb = new timedbuff.TimedBuff(1000);
+            tb.push(Date.now(), 1);
+            tb.push(Date.now(), 2);
+
+            assert.equal(tb.oldest(), 1);
+            assert.equal(tb.newest(), 2);
+        });
     });
 });
